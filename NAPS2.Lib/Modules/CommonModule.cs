@@ -47,7 +47,9 @@ public class CommonModule : Module
         if (configFileOption != null)
         {
             configName = configFileOption.Substring("/config=".Length).Trim();
-            if (configName != "")
+            if (configName == "")
+                configName = null;
+            else
             {
                 if (Path.GetInvalidFileNameChars().Any(configName.Contains))
                     configName = null;
