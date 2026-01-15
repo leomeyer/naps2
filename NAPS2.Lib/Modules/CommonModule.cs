@@ -49,7 +49,7 @@ public class CommonModule : Module
             configName = configFileOption.Substring("/config=".Length).Trim();
             if (configName != "")
             {
-                if (configName.ContainsAny(Path.GetInvalidFileNameChars()))
+                if (Path.GetInvalidFileNameChars().Any(configName.Contains))
                     configName = null;
                 else
                     configFileName += "_" + configName;
