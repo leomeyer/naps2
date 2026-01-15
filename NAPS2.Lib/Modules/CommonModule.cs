@@ -46,9 +46,14 @@ public class CommonModule : Module
                                              .FirstOrDefault(s => s.ToLower().StartsWith("/config="));
         if (configFileOption != null)
         {
-            configName = configFileOption.Substring("/config=".Length);
+            configName = configFileOption.Substring("/config=".Length).Trim();
             if (configName != "")
-                configFileName += "_" + configName;
+            {
+                if (configName.ContainsAny(Path.GetInvalidFileNameChars()))
+                    configName = null;
+                else
+                    configFileName += "_" + configName;
+            }
         }
         configFileName += ".xml";
 
